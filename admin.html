@@ -1,0 +1,2767 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>CODON — Admin</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: #f5f6f3;
+            color: #252823;
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+        }
+
+        button,
+        input {
+            font: inherit;
+        }
+
+
+        /* =========================================================
+           LOGIN
+           ========================================================= */
+
+        .login-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 420px;
+            padding: 40px;
+            background: #ffffff;
+            border: 1px solid #e5e8e2;
+            border-radius: 16px;
+            box-shadow:
+                0 12px 35px rgba(37, 40, 35, 0.06);
+        }
+
+        .logo {
+            display: block;
+            width: 54px;
+            height: 54px;
+            object-fit: contain;
+            margin-bottom: 28px;
+        }
+
+        .login-card h1 {
+            margin: 0 0 8px;
+            font-size: 28px;
+            line-height: 1.2;
+        }
+
+        .login-subtitle {
+            margin: 0 0 30px;
+            color: #81877e;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1px solid #d9ddd6;
+            border-radius: 8px;
+            background: #ffffff;
+            color: #252823;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #252823;
+        }
+
+        .login-button {
+            width: 100%;
+            margin-top: 18px;
+            padding: 14px 18px;
+            border: none;
+            border-radius: 8px;
+            background: #252823;
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .login-button:hover {
+            opacity: 0.92;
+        }
+
+        .login-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .login-error {
+            display: none;
+            margin-top: 16px;
+            padding: 12px 14px;
+            border-radius: 8px;
+            background: #fdf0f0;
+            color: #a33a3a;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+
+        /* =========================================================
+           DASHBOARD
+           ========================================================= */
+
+        .dashboard {
+            display: none;
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 24px 60px;
+        }
+
+        .dashboard-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .dashboard-brand {
+            display: flex;
+            align-items: flex-start;
+            gap: 18px;
+        }
+
+        .dashboard-logo {
+            width: 52px;
+            height: 52px;
+            object-fit: contain;
+        }
+
+        .eyebrow {
+            margin: 2px 0 6px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: #81877e;
+        }
+
+        .dashboard-header h1 {
+            margin: 0;
+            font-size: 32px;
+        }
+
+        .dashboard-subtitle {
+            margin: 6px 0 0;
+            color: #81877e;
+            font-size: 14px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .logout-button,
+        .refresh-button {
+            width: auto;
+            margin: 0;
+            padding: 10px 16px;
+            border: 1px solid #d9ddd6;
+            border-radius: 8px;
+            background: #ffffff;
+            color: #252823;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .logout-button:hover,
+        .refresh-button:hover {
+            background: #f5f6f3;
+        }
+
+
+        /* =========================================================
+           STATS
+           ========================================================= */
+
+        .stats {
+            display: grid;
+            grid-template-columns:
+                repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 36px;
+        }
+
+        .stat-card {
+            padding: 22px;
+            background: #ffffff;
+            border: 1px solid #e5e8e2;
+            border-radius: 12px;
+        }
+
+        .stat-card span {
+            display: block;
+            margin-bottom: 8px;
+            color: #81877e;
+            font-size: 13px;
+        }
+
+        .stat-card strong {
+            font-size: 28px;
+        }
+
+
+        /* =========================================================
+           BOOKINGS
+           ========================================================= */
+
+        .booking-section {
+            overflow: hidden;
+            background: #ffffff;
+            border: 1px solid #e5e8e2;
+            border-radius: 14px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 24px;
+            border-bottom: 1px solid #e5e8e2;
+        }
+
+        .section-header h2 {
+            margin: 0 0 5px;
+            font-size: 20px;
+        }
+
+        .section-header p {
+            margin: 0;
+            color: #81877e;
+            font-size: 13px;
+        }
+
+        .booking-list {
+            padding: 0;
+        }
+
+        .booking-card {
+            display: grid;
+            grid-template-columns:
+                150px 1fr auto;
+            gap: 24px;
+            align-items: center;
+            padding: 22px 24px;
+            border-bottom: 1px solid #e5e8e2;
+        }
+
+        .booking-card:last-child {
+            border-bottom: none;
+        }
+
+        .booking-date {
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .booking-time {
+            margin-top: 5px;
+            color: #81877e;
+            font-size: 13px;
+        }
+
+        .booking-name {
+            margin-bottom: 5px;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .booking-meta {
+            color: #81877e;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .status-confirmed {
+            background: #edf5ee;
+            color: #3d6745;
+        }
+
+        .status-cancelled {
+            background: #f7eeee;
+            color: #914646;
+        }
+
+        .status-other {
+            background: #f0f1ef;
+            color: #62675f;
+        }
+
+        .loading {
+            padding: 40px 24px;
+            text-align: center;
+            color: #81877e;
+        }
+
+
+        /* =========================================================
+           BOOKING ACTIONS
+           ========================================================= */
+
+        .booking-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .booking-action {
+            padding: 9px 13px;
+            border: 1px solid #d9ddd6;
+            border-radius: 8px;
+            background: #ffffff;
+            color: #252823;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .booking-action:hover {
+            background: #f5f6f3;
+        }
+
+        .booking-action-danger:hover {
+            border-color: #e2c8c8;
+            background: #fdf5f5;
+            color: #914646;
+        }
+
+
+        /* =========================================================
+           MODAL
+           ========================================================= */
+
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+
+            display: none;
+            align-items: center;
+            justify-content: center;
+
+            padding: 24px;
+
+            background:
+                rgba(37, 40, 35, 0.35);
+
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            width: 100%;
+            max-width: 500px;
+            max-height: calc(100vh - 48px);
+
+            overflow-y: auto;
+
+            background: #ffffff;
+            border: 1px solid #e5e8e2;
+            border-radius: 16px;
+
+            box-shadow:
+                0 20px 60px rgba(37, 40, 35, 0.15);
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 20px;
+
+            padding: 24px;
+
+            border-bottom: 1px solid #e5e8e2;
+        }
+
+        .modal-header h2 {
+            margin: 0 0 5px;
+            font-size: 21px;
+        }
+
+        .modal-header p {
+            margin: 0;
+            color: #81877e;
+            font-size: 13px;
+        }
+
+        .modal-close {
+            flex-shrink: 0;
+
+            width: 34px;
+            height: 34px;
+
+            border: 1px solid #d9ddd6;
+            border-radius: 8px;
+
+            background: #ffffff;
+            color: #252823;
+
+            font-size: 20px;
+            line-height: 1;
+
+            cursor: pointer;
+        }
+
+        .modal-close:hover {
+            background: #f5f6f3;
+        }
+
+        .modal-body {
+            padding: 24px;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+
+            padding: 18px 24px;
+
+            border-top: 1px solid #e5e8e2;
+        }
+
+
+        /* =========================================================
+           VIEW MODAL
+           ========================================================= */
+
+        .detail-group {
+            margin-bottom: 20px;
+        }
+
+        .detail-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .detail-label {
+            margin-bottom: 5px;
+            color: #81877e;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .detail-value {
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        .detail-message {
+            padding: 14px;
+            background: #f5f6f3;
+            border-radius: 8px;
+            font-size: 14px;
+            line-height: 1.6;
+            white-space: pre-wrap;
+        }
+
+
+        /* =========================================================
+           RESCHEDULE FORM
+           ========================================================= */
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .form-group label {
+            margin-bottom: 8px;
+        }
+
+        .form-help {
+            margin-top: 7px;
+            color: #81877e;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .modal-input {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1px solid #d9ddd6;
+            border-radius: 8px;
+            background: #ffffff;
+            color: #252823;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .modal-input:focus {
+            border-color: #252823;
+        }
+
+        .reschedule-current {
+            margin-bottom: 24px;
+            padding: 14px;
+            background: #f5f6f3;
+            border-radius: 8px;
+        }
+
+        .reschedule-current-label {
+            margin-bottom: 4px;
+            color: #81877e;
+            font-size: 12px;
+        }
+
+        .reschedule-current-value {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+
+        /* =========================================================
+           MODAL BUTTONS
+           ========================================================= */
+
+        .modal-button {
+            padding: 11px 17px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .modal-button-secondary {
+            border: 1px solid #d9ddd6;
+            background: #ffffff;
+            color: #252823;
+        }
+
+        .modal-button-secondary:hover {
+            background: #f5f6f3;
+        }
+
+        .modal-button-primary {
+            border: 1px solid #252823;
+            background: #252823;
+            color: #ffffff;
+        }
+
+        .modal-button-primary:hover {
+            opacity: 0.92;
+        }
+
+        .modal-button-danger {
+            border: 1px solid #914646;
+            background: #914646;
+            color: #ffffff;
+        }
+
+        .modal-button-danger:hover {
+            opacity: 0.92;
+        }
+
+        .modal-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+
+        /* =========================================================
+           TOAST
+           ========================================================= */
+
+        .toast {
+            position: fixed;
+            right: 24px;
+            bottom: 24px;
+            z-index: 2000;
+
+            max-width: 360px;
+
+            padding: 14px 18px;
+
+            background: #252823;
+            color: #ffffff;
+
+            border-radius: 10px;
+
+            font-size: 14px;
+            line-height: 1.5;
+
+            box-shadow:
+                0 12px 35px rgba(37, 40, 35, 0.18);
+
+            opacity: 0;
+            transform: translateY(10px);
+            pointer-events: none;
+
+            transition:
+                opacity 0.2s ease,
+                transform 0.2s ease;
+        }
+
+        .toast.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .toast.error {
+            background: #914646;
+        }
+
+
+        /* =========================================================
+           MOBILE
+           ========================================================= */
+
+        @media (max-width: 700px) {
+
+            .dashboard {
+                padding:
+                    28px
+                    16px
+                    40px;
+            }
+
+            .dashboard-header {
+                flex-direction: column;
+            }
+
+            .header-actions {
+                width: 100%;
+            }
+
+            .logout-button,
+            .refresh-button {
+                flex: 1;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .booking-card {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .booking-actions {
+                justify-content: flex-start;
+            }
+
+            .section-header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .modal-overlay {
+                padding: 16px;
+            }
+
+            .modal {
+                max-height: calc(100vh - 32px);
+            }
+
+            .modal-footer {
+                flex-direction: column-reverse;
+            }
+
+            .modal-button {
+                width: 100%;
+            }
+
+            .toast {
+                right: 16px;
+                bottom: 16px;
+                left: 16px;
+                max-width: none;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================================
+         LOGIN SCREEN
+         ========================================================= -->
+
+    <main
+        class="login-page"
+        id="loginScreen"
+    >
+
+        <section class="login-card">
+
+            <img
+                src="images/logo.png"
+                alt="CODON"
+                class="logo"
+            >
+
+            <h1>
+                Admin login
+            </h1>
+
+            <p class="login-subtitle">
+                Sign in to manage your CODON consultations.
+            </p>
+
+            <form id="adminLoginForm">
+
+                <label for="adminSecret">
+                    Admin password
+                </label>
+
+                <input
+                    type="password"
+                    id="adminSecret"
+                    name="adminSecret"
+                    placeholder="Enter your password"
+                    autocomplete="current-password"
+                    required
+                >
+
+                <button
+                    type="submit"
+                    class="login-button"
+                    id="loginButton"
+                >
+                    Sign in
+                </button>
+
+                <div
+                    class="login-error"
+                    id="loginError"
+                ></div>
+
+            </form>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =========================================================
+         ADMIN DASHBOARD
+         ========================================================= -->
+
+    <main
+        class="dashboard"
+        id="dashboard"
+    >
+
+        <header class="dashboard-header">
+
+            <div class="dashboard-brand">
+
+                <img
+                    src="images/logo.png"
+                    alt="CODON"
+                    class="dashboard-logo"
+                >
+
+                <div>
+
+                    <p class="eyebrow">
+                        CODON ADMIN
+                    </p>
+
+                    <h1>
+                        Bookings
+                    </h1>
+
+                    <p class="dashboard-subtitle">
+                        Manage your upcoming consultations.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="header-actions">
+
+                <button
+                    type="button"
+                    class="refresh-button"
+                    id="refreshButton"
+                >
+                    Refresh
+                </button>
+
+                <button
+                    type="button"
+                    class="logout-button"
+                    id="logoutButton"
+                >
+                    Log out
+                </button>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =====================================================
+             STATS
+             ===================================================== -->
+
+        <section class="stats">
+
+            <div class="stat-card">
+
+                <span>
+                    Upcoming
+                </span>
+
+                <strong id="upcomingCount">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <span>
+                    Confirmed
+                </span>
+
+                <strong id="confirmedCount">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <span>
+                    Cancelled
+                </span>
+
+                <strong id="cancelledCount">
+                    —
+                </strong>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             BOOKINGS
+             ===================================================== -->
+
+        <section class="booking-section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        All bookings
+                    </h2>
+
+                    <p>
+                        Your consultation history.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="bookingList"
+                class="booking-list"
+            >
+
+                <div class="loading">
+                    Loading bookings...
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =========================================================
+         VIEW MODAL
+         ========================================================= -->
+
+    <div
+        class="modal-overlay"
+        id="viewModal"
+    >
+
+        <section
+            class="modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="viewModalTitle"
+        >
+
+            <header class="modal-header">
+
+                <div>
+
+                    <h2 id="viewModalTitle">
+                        Booking details
+                    </h2>
+
+                    <p>
+                        Consultation information
+                    </p>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="modal-close"
+                    data-close-modal="viewModal"
+                    aria-label="Close"
+                >
+                    ×
+                </button>
+
+            </header>
+
+
+            <div
+                class="modal-body"
+                id="viewModalBody"
+            ></div>
+
+
+            <footer class="modal-footer">
+
+                <button
+                    type="button"
+                    class="modal-button modal-button-secondary"
+                    data-close-modal="viewModal"
+                >
+                    Close
+                </button>
+
+            </footer>
+
+        </section>
+
+    </div>
+
+
+
+    <!-- =========================================================
+         CANCEL MODAL
+         ========================================================= -->
+
+    <div
+        class="modal-overlay"
+        id="cancelModal"
+    >
+
+        <section
+            class="modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="cancelModalTitle"
+        >
+
+            <header class="modal-header">
+
+                <div>
+
+                    <h2 id="cancelModalTitle">
+                        Cancel consultation?
+                    </h2>
+
+                    <p>
+                        This action cannot be undone.
+                    </p>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="modal-close"
+                    data-close-modal="cancelModal"
+                    aria-label="Close"
+                >
+                    ×
+                </button>
+
+            </header>
+
+
+            <div
+                class="modal-body"
+                id="cancelModalBody"
+            ></div>
+
+
+            <footer class="modal-footer">
+
+                <button
+                    type="button"
+                    class="modal-button modal-button-secondary"
+                    data-close-modal="cancelModal"
+                >
+                    Keep booking
+                </button>
+
+                <button
+                    type="button"
+                    class="modal-button modal-button-danger"
+                    id="confirmCancelButton"
+                >
+                    Cancel consultation
+                </button>
+
+            </footer>
+
+        </section>
+
+    </div>
+
+
+
+    <!-- =========================================================
+         RESCHEDULE MODAL
+         ========================================================= -->
+
+    <div
+        class="modal-overlay"
+        id="rescheduleModal"
+    >
+
+        <section
+            class="modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="rescheduleModalTitle"
+        >
+
+            <header class="modal-header">
+
+                <div>
+
+                    <h2 id="rescheduleModalTitle">
+                        Reschedule consultation
+                    </h2>
+
+                    <p>
+                        Choose a new date and time.
+                    </p>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="modal-close"
+                    data-close-modal="rescheduleModal"
+                    aria-label="Close"
+                >
+                    ×
+                </button>
+
+            </header>
+
+
+            <form id="rescheduleForm">
+
+                <div class="modal-body">
+
+                    <div
+                        class="reschedule-current"
+                        id="rescheduleCurrent"
+                    ></div>
+
+
+                    <div class="form-group">
+
+                        <label for="rescheduleDate">
+                            New date
+                        </label>
+
+                        <input
+                            type="date"
+                            id="rescheduleDate"
+                            class="modal-input"
+                            required
+                        >
+
+                        <p class="form-help">
+                            Select the new consultation date.
+                        </p>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="rescheduleTime">
+                            New time
+                        </label>
+
+                        <input
+                            type="time"
+                            id="rescheduleTime"
+                            class="modal-input"
+                            required
+                        >
+
+                        <p class="form-help">
+                            Enter the new consultation start time.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <footer class="modal-footer">
+
+                    <button
+                        type="button"
+                        class="modal-button modal-button-secondary"
+                        data-close-modal="rescheduleModal"
+                    >
+                        Keep current time
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="modal-button modal-button-primary"
+                        id="confirmRescheduleButton"
+                    >
+                        Reschedule consultation
+                    </button>
+
+                </footer>
+
+            </form>
+
+        </section>
+
+    </div>
+
+
+
+    <!-- =========================================================
+         TOAST
+         ========================================================= -->
+
+    <div
+        class="toast"
+        id="toast"
+    ></div>
+
+
+
+    <script>
+
+        const API_URL =
+            "https://script.google.com/macros/s/AKfycbzrKw8kHGg0NEOJe8urghp6Lo4AkKFYV9LcXTEl0GnSdKIJma0MwbIByvqdm_Vji_F-/exec";
+
+
+        /* =========================================================
+           STATE
+           ========================================================= */
+
+        let adminSecret = "";
+        let bookings = [];
+        let selectedBookingId = null;
+
+
+        /* =========================================================
+           ELEMENTS
+           ========================================================= */
+
+        const dashboard =
+            document.getElementById(
+                "dashboard"
+            );
+
+        const bookingList =
+            document.getElementById(
+                "bookingList"
+            );
+
+        const refreshButton =
+            document.getElementById(
+                "refreshButton"
+            );
+
+        const logoutButton =
+            document.getElementById(
+                "logoutButton"
+            );
+
+        const upcomingCount =
+            document.getElementById(
+                "upcomingCount"
+            );
+
+        const confirmedCount =
+            document.getElementById(
+                "confirmedCount"
+            );
+
+        const cancelledCount =
+            document.getElementById(
+                "cancelledCount"
+            );
+
+        const loginScreen =
+            document.getElementById(
+                "loginScreen"
+            );
+
+        const adminLoginForm =
+            document.getElementById(
+                "adminLoginForm"
+            );
+
+        const adminSecretInput =
+            document.getElementById(
+                "adminSecret"
+            );
+
+        const loginButton =
+            document.getElementById(
+                "loginButton"
+            );
+
+        const loginError =
+            document.getElementById(
+                "loginError"
+            );
+
+        const viewModal =
+            document.getElementById(
+                "viewModal"
+            );
+
+        const viewModalBody =
+            document.getElementById(
+                "viewModalBody"
+            );
+
+        const cancelModal =
+            document.getElementById(
+                "cancelModal"
+            );
+
+        const cancelModalBody =
+            document.getElementById(
+                "cancelModalBody"
+            );
+
+        const confirmCancelButton =
+            document.getElementById(
+                "confirmCancelButton"
+            );
+
+        const rescheduleModal =
+            document.getElementById(
+                "rescheduleModal"
+            );
+
+        const rescheduleForm =
+            document.getElementById(
+                "rescheduleForm"
+            );
+
+        const rescheduleCurrent =
+            document.getElementById(
+                "rescheduleCurrent"
+            );
+
+        const rescheduleDate =
+            document.getElementById(
+                "rescheduleDate"
+            );
+
+        const rescheduleTime =
+            document.getElementById(
+                "rescheduleTime"
+            );
+
+        const confirmRescheduleButton =
+            document.getElementById(
+                "confirmRescheduleButton"
+            );
+
+        const toast =
+            document.getElementById(
+                "toast"
+            );
+
+
+        /* =========================================================
+           LOGIN
+           ========================================================= */
+
+        adminLoginForm.addEventListener(
+            "submit",
+            async function(event) {
+
+                event.preventDefault();
+
+                const secret =
+                    adminSecretInput.value.trim();
+
+                if (!secret) {
+
+                    showLoginError(
+                        "Please enter your admin password."
+                    );
+
+                    return;
+
+                }
+
+                loginError.style.display =
+                    "none";
+
+                loginButton.disabled =
+                    true;
+
+                loginButton.textContent =
+                    "Signing in...";
+
+
+                try {
+
+                    const url =
+                        `${API_URL}?action=adminBookings&CODON_ADMIN_SECRET=${encodeURIComponent(secret)}`;
+
+                    const response =
+                        await fetch(url);
+
+                    const data =
+                        await response.json();
+
+
+                    if (!data.success) {
+
+                        showLoginError(
+                            data.message ||
+                            "Incorrect admin password."
+                        );
+
+                        return;
+
+                    }
+
+
+                    /*
+                     * Authentication succeeded.
+                     */
+
+                    adminSecret =
+                        secret;
+
+                    bookings =
+                        data.bookings || [];
+
+
+                    /*
+                     * Hide login.
+                     * Show dashboard.
+                     */
+
+                    loginScreen.style.display =
+                        "none";
+
+                    dashboard.style.display =
+                        "block";
+
+
+                    updateStats();
+
+                    renderBookings();
+
+
+                } catch (error) {
+
+                    console.error(
+                        error
+                    );
+
+                    showLoginError(
+                        "Unable to connect to the CODON booking system."
+                    );
+
+                } finally {
+
+                    loginButton.disabled =
+                        false;
+
+                    loginButton.textContent =
+                        "Sign in";
+
+                }
+
+            }
+        );
+
+
+        /* =========================================================
+           LOGIN ERROR
+           ========================================================= */
+
+        function showLoginError(
+            message
+        ) {
+
+            loginError.textContent =
+                message;
+
+            loginError.style.display =
+                "block";
+
+        }
+
+
+        /* =========================================================
+           LOAD BOOKINGS
+           ========================================================= */
+
+        async function loadBookings() {
+
+            bookingList.innerHTML = `
+                <div class="loading">
+                    Loading bookings...
+                </div>
+            `;
+
+
+            try {
+
+                const url =
+                    `${API_URL}?action=adminBookings&CODON_ADMIN_SECRET=${encodeURIComponent(adminSecret)}`;
+
+                const response =
+                    await fetch(url);
+
+                const data =
+                    await response.json();
+
+
+                if (!data.success) {
+
+                    throw new Error(
+                        data.message ||
+                        "Unable to load bookings."
+                    );
+
+                }
+
+
+                bookings =
+                    data.bookings || [];
+
+                updateStats();
+                renderBookings();
+
+
+            } catch (error) {
+
+                console.error(
+                    error
+                );
+
+                bookingList.innerHTML = `
+                    <div class="loading">
+                        Unable to load bookings.
+                    </div>
+                `;
+
+            }
+
+        }
+
+
+        /* =========================================================
+           UPDATE STATISTICS
+           ========================================================= */
+
+        function updateStats() {
+
+            const confirmed =
+                bookings.filter(
+                    booking =>
+                        booking.status
+                            .toLowerCase() ===
+                        "confirmed"
+                );
+
+
+            const cancelled =
+                bookings.filter(
+                    booking =>
+                        booking.status
+                            .toLowerCase() ===
+                        "cancelled"
+                );
+
+
+            const now =
+                new Date();
+
+
+            const upcoming =
+                confirmed.filter(
+                    booking => {
+
+                        const appointment =
+                            new Date(
+                                `${booking.date}T${booking.time}:00`
+                            );
+
+                        return (
+                            appointment > now
+                        );
+
+                    }
+                );
+
+
+            upcomingCount.textContent =
+                upcoming.length;
+
+            confirmedCount.textContent =
+                confirmed.length;
+
+            cancelledCount.textContent =
+                cancelled.length;
+
+        }
+
+
+        /* =========================================================
+           RENDER BOOKINGS
+           ========================================================= */
+
+        function renderBookings() {
+
+            if (
+                bookings.length === 0
+            ) {
+
+                bookingList.innerHTML = `
+                    <div class="loading">
+                        No bookings found.
+                    </div>
+                `;
+
+                return;
+
+            }
+
+
+            const sortedBookings =
+                [...bookings].sort(
+                    (a, b) => {
+
+                        const dateA =
+                            new Date(
+                                `${a.date}T${a.time}:00`
+                            );
+
+                        const dateB =
+                            new Date(
+                                `${b.date}T${b.time}:00`
+                            );
+
+                        return (
+                            dateA - dateB
+                        );
+
+                    }
+                );
+
+
+            bookingList.innerHTML =
+                sortedBookings
+                    .map(
+                        booking =>
+                            createBookingCard(
+                                booking
+                            )
+                    )
+                    .join("");
+
+        }
+
+
+        /* =========================================================
+           CREATE BOOKING CARD
+           ========================================================= */
+
+        function createBookingCard(
+            booking
+        ) {
+
+            const status =
+                booking.status
+                    .toLowerCase();
+
+
+            let statusClass =
+                "status-other";
+
+            if (
+                status ===
+                "confirmed"
+            ) {
+
+                statusClass =
+                    "status-confirmed";
+
+            } else if (
+                status ===
+                "cancelled"
+            ) {
+
+                statusClass =
+                    "status-cancelled";
+
+            }
+
+
+            const appointment =
+                new Date(
+                    `${booking.date}T${booking.time}:00`
+                );
+
+
+            const isPast =
+                appointment <=
+                new Date();
+
+
+            const isCancelled =
+                status ===
+                "cancelled";
+
+
+            return `
+
+                <article
+                    class="booking-card"
+                    data-booking-id="${escapeHtml(
+                        booking.id
+                    )}"
+                >
+
+                    <div>
+
+                        <div class="booking-date">
+
+                            ${formatDate(
+                                booking.date
+                            )}
+
+                        </div>
+
+                        <div class="booking-time">
+
+                            ${escapeHtml(
+                                booking.time
+                            )}
+
+                        </div>
+
+                    </div>
+
+
+                    <div>
+
+                        <div class="booking-name">
+
+                            ${escapeHtml(
+                                booking.name
+                            )}
+
+                        </div>
+
+                        <div class="booking-meta">
+
+                            ${escapeHtml(
+                                booking.email
+                            )}
+
+                            <br>
+
+                            ${escapeHtml(
+                                booking.subject
+                            )}
+
+                            ·
+
+                            ${escapeHtml(
+                                booking.role
+                            )}
+
+                            <br>
+
+                            Booking ID:
+
+                            ${escapeHtml(
+                                booking.id
+                            )}
+
+                        </div>
+
+                    </div>
+
+
+                    <div>
+
+                        <span
+                            class="status ${statusClass}"
+                        >
+
+                            ${escapeHtml(
+                                booking.status
+                            )}
+
+                        </span>
+
+
+                        <div class="booking-actions">
+
+                            <button
+                                type="button"
+                                class="booking-action"
+                                onclick="viewBooking('${escapeJs(
+                                    booking.id
+                                )}')"
+                            >
+
+                                View
+
+                            </button>
+
+
+                            ${
+                                !isCancelled && !isPast
+                                    ? `
+
+                                        <button
+                                            type="button"
+                                            class="booking-action"
+                                            onclick="rescheduleBooking('${escapeJs(
+                                                booking.id
+                                            )}')"
+                                        >
+
+                                            Reschedule
+
+                                        </button>
+
+
+                                        <button
+                                            type="button"
+                                            class="booking-action booking-action-danger"
+                                            onclick="cancelBooking('${escapeJs(
+                                                booking.id
+                                            )}')"
+                                        >
+
+                                            Cancel
+
+                                        </button>
+
+                                    `
+                                    : ""
+                            }
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            `;
+
+        }
+
+
+        /* =========================================================
+           VIEW BOOKING
+           ========================================================= */
+
+        function viewBooking(
+            bookingId
+        ) {
+
+            const booking =
+                bookings.find(
+                    item =>
+                        item.id ===
+                        bookingId
+                );
+
+
+            if (!booking) {
+                return;
+            }
+
+
+            const message =
+                booking.message ||
+                "None provided";
+
+
+            viewModalBody.innerHTML = `
+
+                <div class="detail-group">
+
+                    <div class="detail-label">
+                        Booking ID
+                    </div>
+
+                    <div class="detail-value">
+                        ${escapeHtml(
+                            booking.id
+                        )}
+                    </div>
+
+                </div>
+
+
+                <div class="detail-group">
+
+                    <div class="detail-label">
+                        Name
+                    </div>
+
+                    <div class="detail-value">
+                        ${escapeHtml(
+                            booking.name
+                        )}
+                    </div>
+
+                </div>
+
+
+                <div class="detail-group">
+
+                    <div class="detail-label">
+                        Email
+                    </div>
+
+                    <div class="detail-value">
+                        ${escapeHtml(
+                            booking.email
+                        )}
+                    </div>
+
+                </div>
+
+
+                <div class="detail-group">
+
+                    <div class="detail-label">
+                        Role
+                    </div>
+
+                    <div class="detail-value">
+                        ${escapeHtml(
+                            booking.role
+                        )}
+                    </div>
+
+                </div>
+
+
+                <div class="detail-group">
+
+                    <div class="detail-label">
+                        Subject
+                    </div>
+
+                    <div class="detail-value">
+                        ${escapeHtml(
+                            booking.subject
+                        )}
+                    </div>
+
+                </div>
+
+
+                <div class="detail-group">
+
+                    <div class="detail-label">
+                        Appointment
+                    </div>
+
+                    <div class="detail-value">
+
+                        ${formatDate(
+                            booking.date
+                        )}
+
+                        at
+
+                        ${escapeHtml(
+                            booking.time
+                        )}
+
+                    </div>
+
+                </div>
+
+
+                <div class="detail-group">
+
+                    <div class="detail-label">
+                        Status
+                    </div>
+
+                    <div class="detail-value">
+                        ${escapeHtml(
+                            booking.status
+                        )}
+                    </div>
+
+                </div>
+
+
+                <div class="detail-group">
+
+                    <div class="detail-label">
+                        Additional information
+                    </div>
+
+                    <div class="detail-message">
+                        ${escapeHtml(
+                            message
+                        )}
+                    </div>
+
+                </div>
+
+            `;
+
+
+            openModal(
+                viewModal
+            );
+
+        }
+
+
+        /* =========================================================
+           CANCEL BOOKING
+           ========================================================= */
+
+        function cancelBooking(
+            bookingId
+        ) {
+
+            const booking =
+                bookings.find(
+                    item =>
+                        item.id ===
+                        bookingId
+                );
+
+
+            if (!booking) {
+                return;
+            }
+
+
+            selectedBookingId =
+                bookingId;
+
+
+            cancelModalBody.innerHTML = `
+
+                <p
+                    style="
+                        margin:0 0 18px;
+                        font-size:15px;
+                        line-height:1.6;
+                    "
+                >
+
+                    You are about to cancel the consultation for
+
+                    <strong>
+                        ${escapeHtml(
+                            booking.name
+                        )}
+                    </strong>.
+
+                </p>
+
+
+                <div class="reschedule-current">
+
+                    <div class="reschedule-current-label">
+                        Current appointment
+                    </div>
+
+                    <div class="reschedule-current-value">
+
+                        ${formatDate(
+                            booking.date
+                        )}
+
+                        at
+
+                        ${escapeHtml(
+                            booking.time
+                        )}
+
+                    </div>
+
+                </div>
+
+
+                <p
+                    style="
+                        margin:0;
+                        color:#81877e;
+                        font-size:13px;
+                        line-height:1.6;
+                    "
+                >
+
+                    The Google Calendar appointment will be removed
+                    and the customer will be notified.
+
+                </p>
+
+            `;
+
+
+            openModal(
+                cancelModal
+            );
+
+        }
+
+
+        /* =========================================================
+           CONFIRM CANCEL
+           ========================================================= */
+
+        confirmCancelButton.addEventListener(
+            "click",
+            async function() {
+
+                if (!selectedBookingId) {
+                    return;
+                }
+
+
+                const booking =
+                    bookings.find(
+                        item =>
+                            item.id ===
+                            selectedBookingId
+                    );
+
+
+                if (!booking) {
+                    closeModal(cancelModal);
+                    return;
+                }
+
+
+                confirmCancelButton.disabled =
+                    true;
+
+                confirmCancelButton.textContent =
+                    "Cancelling...";
+
+
+                try {
+
+                    const response =
+                        await fetch(
+                            API_URL,
+                            {
+                                method:
+                                    "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "text/plain;charset=utf-8"
+                                },
+
+                                body:
+                                    JSON.stringify({
+
+                                        action:
+                                            "adminCancel",
+
+                                        adminSecret:
+                                            adminSecret,
+
+                                        bookingId:
+                                            selectedBookingId
+
+                                    })
+                            }
+                        );
+
+
+                    const data =
+                        await response.json();
+
+
+                    if (
+                        !data.success
+                    ) {
+
+                        throw new Error(
+                            data.message ||
+                            "Unable to cancel booking."
+                        );
+
+                    }
+
+
+                    closeModal(
+                        cancelModal
+                    );
+
+
+                    showToast(
+                        "Booking cancelled successfully."
+                    );
+
+
+                    selectedBookingId =
+                        null;
+
+
+                    await loadBookings();
+
+
+                } catch (error) {
+
+                    console.error(
+                        error
+                    );
+
+                    showToast(
+                        error.message ||
+                        "Unable to connect to the booking system.",
+                        true
+                    );
+
+                } finally {
+
+                    confirmCancelButton.disabled =
+                        false;
+
+                    confirmCancelButton.textContent =
+                        "Cancel consultation";
+
+                }
+
+            }
+        );
+
+
+        /* =========================================================
+           RESCHEDULE BOOKING
+           ========================================================= */
+
+        function rescheduleBooking(
+            bookingId
+        ) {
+
+            const booking =
+                bookings.find(
+                    item =>
+                        item.id ===
+                        bookingId
+                );
+
+
+            if (!booking) {
+                return;
+            }
+
+
+            selectedBookingId =
+                bookingId;
+
+
+            rescheduleCurrent.innerHTML = `
+
+                <div class="reschedule-current-label">
+                    Current appointment
+                </div>
+
+                <div class="reschedule-current-value">
+
+                    ${formatDate(
+                        booking.date
+                    )}
+
+                    at
+
+                    ${escapeHtml(
+                        booking.time
+                    )}
+
+                </div>
+
+            `;
+
+
+            rescheduleDate.value =
+                booking.date;
+
+            rescheduleTime.value =
+                booking.time;
+
+
+            openModal(
+                rescheduleModal
+            );
+
+        }
+
+
+        /* =========================================================
+           SUBMIT RESCHEDULE
+           ========================================================= */
+
+        rescheduleForm.addEventListener(
+            "submit",
+            async function(event) {
+
+                event.preventDefault();
+
+
+                if (!selectedBookingId) {
+                    return;
+                }
+
+
+                const newDate =
+                    rescheduleDate.value;
+
+                const newTime =
+                    rescheduleTime.value;
+
+
+                if (
+                    !newDate ||
+                    !newTime
+                ) {
+
+                    showToast(
+                        "Please choose both a date and a time.",
+                        true
+                    );
+
+                    return;
+
+                }
+
+
+                const booking =
+                    bookings.find(
+                        item =>
+                            item.id ===
+                            selectedBookingId
+                    );
+
+
+                if (!booking) {
+
+                    closeModal(
+                        rescheduleModal
+                    );
+
+                    return;
+
+                }
+
+
+                const appointment =
+                    new Date(
+                        `${newDate}T${newTime}:00`
+                    );
+
+
+                if (
+                    appointment <=
+                    new Date()
+                ) {
+
+                    showToast(
+                        "The new appointment must be in the future.",
+                        true
+                    );
+
+                    return;
+
+                }
+
+
+                confirmRescheduleButton.disabled =
+                    true;
+
+                confirmRescheduleButton.textContent =
+                    "Rescheduling...";
+
+
+                try {
+
+                    const response =
+                        await fetch(
+                            API_URL,
+                            {
+                                method:
+                                    "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "text/plain;charset=utf-8"
+                                },
+
+                                body:
+                                    JSON.stringify({
+
+                                        action:
+                                            "adminReschedule",
+
+                                        adminSecret:
+                                            adminSecret,
+
+                                        bookingId:
+                                            selectedBookingId,
+
+                                        date:
+                                            newDate,
+
+                                        time:
+                                            newTime
+
+                                    })
+                            }
+                        );
+
+
+                    const data =
+                        await response.json();
+
+
+                    if (
+                        !data.success
+                    ) {
+
+                        throw new Error(
+                            data.message ||
+                            "Unable to reschedule booking."
+                        );
+
+                    }
+
+
+                    closeModal(
+                        rescheduleModal
+                    );
+
+
+                    showToast(
+                        "Booking rescheduled successfully."
+                    );
+
+
+                    selectedBookingId =
+                        null;
+
+
+                    await loadBookings();
+
+
+                } catch (error) {
+
+                    console.error(
+                        error
+                    );
+
+                    showToast(
+                        error.message ||
+                        "Unable to connect to the booking system.",
+                        true
+                    );
+
+                } finally {
+
+                    confirmRescheduleButton.disabled =
+                        false;
+
+                    confirmRescheduleButton.textContent =
+                        "Reschedule consultation";
+
+                }
+
+            }
+        );
+
+
+        /* =========================================================
+           MODAL HELPERS
+           ========================================================= */
+
+        function openModal(
+            modal
+        ) {
+
+            modal.classList.add(
+                "active"
+            );
+
+            document.body.style.overflow =
+                "hidden";
+
+        }
+
+
+        function closeModal(
+            modal
+        ) {
+
+            modal.classList.remove(
+                "active"
+            );
+
+            document.body.style.overflow =
+                "";
+
+        }
+
+
+        document.querySelectorAll(
+            "[data-close-modal]"
+        ).forEach(
+            button => {
+
+                button.addEventListener(
+                    "click",
+                    function() {
+
+                        const modalId =
+                            button.getAttribute(
+                                "data-close-modal"
+                            );
+
+                        const modal =
+                            document.getElementById(
+                                modalId
+                            );
+
+                        closeModal(
+                            modal
+                        );
+
+                        selectedBookingId =
+                            null;
+
+                    }
+                );
+
+            }
+        );
+
+
+        document.querySelectorAll(
+            ".modal-overlay"
+        ).forEach(
+            overlay => {
+
+                overlay.addEventListener(
+                    "click",
+                    function(event) {
+
+                        if (
+                            event.target ===
+                            overlay
+                        ) {
+
+                            closeModal(
+                                overlay
+                            );
+
+                            selectedBookingId =
+                                null;
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+
+        document.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (
+                    event.key !==
+                    "Escape"
+                ) {
+                    return;
+                }
+
+
+                document.querySelectorAll(
+                    ".modal-overlay.active"
+                ).forEach(
+                    modal => {
+
+                        closeModal(
+                            modal
+                        );
+
+                    }
+                );
+
+
+                selectedBookingId =
+                    null;
+
+            }
+        );
+
+
+        /* =========================================================
+           TOAST
+           ========================================================= */
+
+        let toastTimeout;
+
+
+        function showToast(
+            message,
+            isError = false
+        ) {
+
+            clearTimeout(
+                toastTimeout
+            );
+
+
+            toast.textContent =
+                message;
+
+
+            toast.classList.toggle(
+                "error",
+                isError
+            );
+
+
+            toast.classList.add(
+                "active"
+            );
+
+
+            toastTimeout =
+                setTimeout(
+                    function() {
+
+                        toast.classList.remove(
+                            "active"
+                        );
+
+                    },
+                    3500
+                );
+
+        }
+
+
+        /* =========================================================
+           REFRESH
+           ========================================================= */
+
+        refreshButton.addEventListener(
+            "click",
+            loadBookings
+        );
+
+
+        /* =========================================================
+           LOGOUT
+           ========================================================= */
+
+        logoutButton.addEventListener(
+            "click",
+            function() {
+
+                adminSecret =
+                    "";
+
+                bookings =
+                    [];
+
+                selectedBookingId =
+                    null;
+
+                window.location.reload();
+
+            }
+        );
+
+
+        /* =========================================================
+           HELPERS
+           ========================================================= */
+
+        function formatDate(
+            dateString
+        ) {
+
+            const date =
+                new Date(
+                    `${dateString}T00:00:00`
+                );
+
+
+            return date.toLocaleDateString(
+                "en-GB",
+                {
+                    weekday: "short",
+                    day: "numeric",
+                    month: "short",
+                    year: "numeric"
+                }
+            );
+
+        }
+
+
+        function escapeHtml(
+            value
+        ) {
+
+            return String(
+                value ?? ""
+            )
+                .replace(
+                    /&/g,
+                    "&amp;"
+                )
+                .replace(
+                    /</g,
+                    "&lt;"
+                )
+                .replace(
+                    />/g,
+                    "&gt;"
+                )
+                .replace(
+                    /"/g,
+                    "&quot;"
+                )
+                .replace(
+                    /'/g,
+                    "&#039;"
+                );
+
+        }
+
+
+        function escapeJs(
+            value
+        ) {
+
+            return String(
+                value ?? ""
+            )
+                .replace(
+                    /\\/g,
+                    "\\\\"
+                )
+                .replace(
+                    /'/g,
+                    "\\'"
+                );
+
+        }
+
+    </script>
+
+</body>
+
+</html>

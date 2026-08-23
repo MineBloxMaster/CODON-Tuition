@@ -1,0 +1,1410 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <title>Book a free consultation — CODON</title>
+
+  <style>
+    :root {
+      --bg: #f6f7f3;
+      --surface: #fff;
+      --ink: #10130f;
+      --muted: #686d65;
+      --line: #dfe3dc;
+      --accent: #b9e96a;
+      --dark: #111510;
+      --max: 1080px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, system-ui, sans-serif;
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .wrap {
+      width: min(calc(100% - 36px), var(--max));
+      margin: auto;
+    }
+
+    header {
+      border-bottom: 1px solid var(--line);
+      background: rgba(246, 247, 243, 0.94);
+      backdrop-filter: blur(15px);
+    }
+
+    nav {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .brand-logo{width:126px;height:auto;display:block}
+
+    .mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: var(--dark);
+      color: var(--accent);
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+    }
+
+    .back {
+      font-weight: 700;
+      color: #555b52;
+    }
+
+    main {
+      padding: 65px 0 100px;
+    }
+
+    .intro {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 42px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 7px 11px;
+      font-size: 0.8rem;
+      font-weight: 750;
+      margin-bottom: 20px;
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #9fd94d;
+    }
+
+    .intro h1 {
+      margin: 0;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      line-height: 0.95;
+      letter-spacing: -0.065em;
+    }
+
+    .intro p {
+      color: var(--muted);
+      max-width: 580px;
+      margin: 20px auto;
+      line-height: 1.65;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 18px;
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      padding: 30px;
+      box-shadow: 0 8px 30px rgba(16, 19, 15, 0.035);
+    }
+
+    .panel h2 {
+      margin: 0 0 7px;
+      font-size: 1.3rem;
+    }
+
+    .panel-intro {
+      margin: 0 0 22px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .field {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.86rem;
+      font-weight: 750;
+      margin-bottom: 7px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      background: #fbfcfa;
+      color: var(--ink);
+      border-radius: 13px;
+      padding: 12px;
+      outline: none;
+      font: inherit;
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #78a93d;
+      box-shadow: 0 0 0 3px rgba(120, 169, 61, 0.14);
+    }
+
+    .calendar-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .month {
+      font-weight: 800;
+    }
+
+    .month-nav {
+      display: flex;
+      gap: 7px;
+    }
+
+    .month-nav button,
+    .day,
+    .time {
+      border: 1px solid var(--line);
+      background: #f4f6f1;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .month-nav button {
+      width: 36px;
+      height: 36px;
+    }
+
+    .weekdays,
+    .days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+    }
+
+    .weekday {
+      text-align: center;
+      color: #8a9086;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 5px;
+    }
+
+    .day {
+      min-height: 42px;
+      font-weight: 700;
+    }
+
+    .day:disabled {
+      cursor: not-allowed;
+      color: #b7bbb4;
+      background: #f1f2ef;
+    }
+
+    .time:disabled {
+      cursor: not-allowed;
+      color: #b7bbb4;
+      background: #f1f2ef;
+      opacity: 0.6;
+    }
+
+    .day.selected,
+    .time.selected {
+      background: var(--dark);
+      color: #fff;
+      border-color: var(--dark);
+    }
+
+    .times {
+      margin-top: 24px;
+      padding-top: 22px;
+      border-top: 1px solid var(--line);
+    }
+
+    .times h3 {
+      font-size: 0.95rem;
+    }
+
+    .time-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .time {
+      padding: 11px;
+      font-weight: 700;
+    }
+
+    .summary {
+      margin-top: 18px;
+      padding: 13px;
+      border-radius: 13px;
+      background: #f1f4eb;
+      color: #485141;
+      font-size: 0.88rem;
+    }
+
+    .submit {
+      width: 100%;
+      border: 0;
+      background: var(--dark);
+      color: white;
+      border-radius: 999px;
+      min-height: 48px;
+      font-weight: 800;
+      cursor: pointer;
+      margin-top: 7px;
+    }
+
+    .submit:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+
+    .fine {
+      text-align: center;
+      color: #81877e;
+      font-size: 0.78rem;
+    }
+
+    .error {
+      display: none;
+      color: #a43b32;
+      font-size: 0.82rem;
+      margin: 8px 0;
+    }
+
+    .success {
+      display: none;
+      text-align: center;
+      padding: 25px;
+    }
+
+    .success-mark {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: grid;
+      place-items: center;
+      margin: 0 auto 18px;
+      font-weight: 900;
+      font-size: 1.5rem;
+    }
+
+    .success p {
+      color: var(--muted);
+    }
+
+    .details {
+      background: #f3f5ef;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px;
+      text-align: left;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 24px 0 32px;
+      color: #73786f;
+      font-size: 0.88rem;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 820px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .wrap {
+        width: min(calc(100% - 26px), var(--max));
+      }
+
+      .grid {
+        gap: 14px;
+      }
+
+      .panel {
+        padding: 24px;
+      }
+
+      .time-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="wrap">
+      <nav>
+        <a class="brand" href="index.html">
+            <img class="brand-logo" src="images/logo.png" alt="CODON"/>
+        </a>
+
+        <a class="back" href="index.html">
+          ← Back to CODON
+        </a>
+      </nav>
+    </div>
+  </header>
+
+
+  <main>
+    <div class="wrap">
+
+      <section class="intro">
+        <div class="eyebrow">
+          <span class="dot"></span>
+          Free · 15 minutes · Online
+        </div>
+
+        <h1>Let's figure out where you need help.</h1>
+
+        <p>
+          Tell us a little about yourself, then choose a date and time
+          that works. No payment is required for the consultation.
+        </p>
+      </section>
+
+
+      <div class="grid">
+
+        <!-- DETAILS -->
+        <section class="panel">
+
+          <h2>Your details</h2>
+
+          <p class="panel-intro">
+            Just the essentials. We'll use these details to confirm
+            the consultation.
+          </p>
+
+          <form id="form">
+
+            <div class="field">
+              <label for="name">Name</label>
+
+              <input
+                id="name"
+                required
+                autocomplete="name"
+                placeholder="Your name"
+              >
+            </div>
+
+
+            <div class="field">
+              <label for="email">Email</label>
+
+              <input
+                id="email"
+                type="email"
+                required
+                autocomplete="email"
+                placeholder="you@example.com"
+              >
+            </div>
+
+
+            <div class="field">
+              <label for="role">I am a</label>
+
+              <select id="role" required>
+                <option value="">Select one</option>
+                <option>Student</option>
+                <option>Parent / guardian</option>
+              </select>
+            </div>
+
+
+            <div class="field">
+              <label for="subject">
+                Subject you need help with
+              </label>
+
+              <select id="subject" required>
+                <option value="">Select a subject</option>
+                <option>Mathematics</option>
+                <option>Biology</option>
+                <option>Chemistry</option>
+                <option>Physics</option>
+                <option>Computer Science</option>
+              </select>
+            </div>
+
+
+            <div class="field">
+              <label for="message">
+                Anything you'd like us to know?
+                <span style="font-weight:400;color:#777">
+                  (optional)
+                </span>
+              </label>
+
+              <textarea
+                id="message"
+                placeholder="Topics you're struggling with, current target grade, etc."
+              ></textarea>
+            </div>
+
+
+            <div id="error" class="error">
+              Something went wrong. Please check your details and try again.
+            </div>
+
+
+            <button
+              class="submit"
+              id="submitButton"
+              type="submit"
+            >
+              Book consultation
+            </button>
+
+            <p class="fine">
+              Your request will be sent securely to CODON for confirmation.
+            </p>
+
+          </form>
+
+
+          <!-- SUCCESS -->
+          <div id="success" class="success">
+
+            <div class="success-mark">
+              ✓
+            </div>
+
+            <h2>Consultation booked.</h2>
+
+            <p>
+              You're all set. A confirmation email has been sent to you.
+            </p>
+
+            <div class="details" id="details"></div>
+
+          </div>
+
+        </section>
+
+
+        <!-- CALENDAR -->
+        <section class="panel">
+
+          <h2>Choose a time</h2>
+
+          <p class="panel-intro">
+            Select an available date, then choose a time.
+          </p>
+
+
+          <div class="calendar-head">
+
+            <strong id="month"></strong>
+
+            <div class="month-nav">
+
+              <button
+                type="button"
+                id="prev"
+                aria-label="Previous month"
+              >
+                ←
+              </button>
+
+              <button
+                type="button"
+                id="next"
+                aria-label="Next month"
+              >
+                →
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <div class="weekdays">
+            <div class="weekday">Mon</div>
+            <div class="weekday">Tue</div>
+            <div class="weekday">Wed</div>
+            <div class="weekday">Thu</div>
+            <div class="weekday">Fri</div>
+            <div class="weekday">Sat</div>
+            <div class="weekday">Sun</div>
+          </div>
+
+
+          <div class="days" id="days"></div>
+
+
+          <div class="times">
+
+            <h3 id="timeTitle">
+              Choose a date first
+            </h3>
+
+            <div class="time-grid" id="times"></div>
+
+          </div>
+
+
+          <div class="summary" id="summary">
+            No date or time selected yet.
+          </div>
+
+        </section>
+
+      </div>
+
+    </div>
+  </main>
+
+
+  <footer>
+    <div class="wrap footer">
+
+      <div>
+        <strong>CODON</strong> · GCSE tutoring
+      </div>
+
+      <div>
+        Maths · Biology · Chemistry · Physics · Computer Science
+      </div>
+
+    </div>
+  </footer>
+
+
+  <script>
+
+    /*
+     * ============================================================
+     * CODON BOOKING CONFIGURATION
+     * ============================================================
+     *
+     * After deploying your Google Apps Script:
+     *
+     * 1. Copy the Web App URL.
+     * 2. Paste it below.
+     *
+     * Example:
+     *
+     * const API_URL =
+     *   "https://script.google.com/macros/s/XXXXXXXX/exec";
+     *
+     */
+
+    const API_URL =
+      "https://script.google.com/macros/s/AKfycbzrKw8kHGg0NEOJe8urghp6Lo4AkKFYV9LcXTEl0GnSdKIJma0MwbIByvqdm_Vji_F-/exec";
+
+
+    /*
+     * ============================================================
+     * BOOKING STATE
+     * ============================================================
+     */
+
+    const state = {
+      month: new Date(),
+      date: null,
+      time: null
+    };
+
+
+    /*
+     * These are the consultation times CODON currently offers.
+     *
+     * The backend will still check Google Calendar before
+     * creating the booking, so a slot cannot be double-booked.
+     */
+
+    const $ = id => document.getElementById(id);
+
+
+    /*
+     * ============================================================
+     * DATE HELPERS
+     * ============================================================
+     */
+
+    const key = date =>
+      `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+
+
+    const fmt = date =>
+      date.toLocaleDateString("en-GB", {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+      });
+
+
+    /*
+     * ============================================================
+     * CALENDAR
+     * ============================================================
+     */
+
+    async function render() {
+
+      const year =
+        state.month.getFullYear();
+
+      const month =
+        state.month.getMonth();
+
+      const first =
+        new Date(year, month, 1);
+
+      const last =
+        new Date(year, month + 1, 0);
+
+
+      /*
+      * Month heading
+      */
+
+      $("month").textContent =
+        state.month.toLocaleDateString(
+          "en-GB",
+          {
+            month: "long",
+            year: "numeric"
+          }
+        );
+
+
+      /*
+      * Clear calendar.
+      */
+
+      $("days").innerHTML = "";
+
+
+      /*
+      * Monday is the first column.
+      */
+
+      const offset =
+        (first.getDay() + 6) % 7;
+
+
+      for (let i = 0; i < offset; i++) {
+
+        const blank =
+          document.createElement("div");
+
+        $("days").appendChild(blank);
+
+      }
+
+
+      /*
+      * Today's date.
+      */
+
+      const today =
+        new Date();
+
+      today.setHours(
+        0,
+        0,
+        0,
+        0
+      );
+
+
+      /*
+      * ============================================================
+      * RENDER DATES
+      * ============================================================
+      */
+
+      for (
+        let number = 1;
+        number <= last.getDate();
+        number++
+      ) {
+
+        const date =
+          new Date(
+            year,
+            month,
+            number
+          );
+
+        date.setHours(
+          0,
+          0,
+          0,
+          0
+        );
+
+
+        const button =
+          document.createElement("button");
+
+
+        button.type =
+          "button";
+
+        button.className =
+          "day";
+
+        button.textContent =
+          number;
+
+
+        /*
+        * Weekends are currently the only days
+        * that can potentially have availability.
+        */
+
+        const weekend =
+          date.getDay() === 0 ||
+          date.getDay() === 6;
+
+
+        /*
+        * Disable past dates and weekdays.
+        */
+
+        button.disabled =
+          date <= today ||
+          !weekend;
+
+
+        /*
+        * Highlight selected date.
+        */
+
+        if (
+          state.date &&
+          key(state.date) === key(date)
+        ) {
+
+          button.classList.add(
+            "selected"
+          );
+
+        }
+
+
+        /*
+        * When a date is clicked,
+        * load its actual availability.
+        */
+
+        button.onclick = async () => {
+
+          state.date =
+            date;
+
+          state.time =
+            null;
+
+          await render();
+
+        };
+
+
+        $("days").appendChild(
+          button
+        );
+
+      }
+
+
+      /*
+      * ============================================================
+      * TIME AREA
+      * ============================================================
+      */
+
+      $("times").innerHTML = "";
+
+
+      if (!state.date) {
+
+        $("timeTitle").textContent =
+          "Choose a date first";
+
+        $("summary").textContent =
+          "No date or time selected yet.";
+
+        return;
+
+      }
+
+
+      $("timeTitle").textContent =
+        `Checking availability · ${
+          state.date.toLocaleDateString(
+            "en-GB",
+            {
+              day: "numeric",
+              month: "long"
+            }
+          )
+        }`;
+
+
+      /*
+      * Loading message.
+      */
+
+      const loading =
+        document.createElement("p");
+
+      loading.textContent =
+        "Checking available times...";
+
+      loading.style.color =
+        "#81877e";
+
+      loading.style.fontSize =
+        "0.85rem";
+
+      $("times").appendChild(
+        loading
+      );
+
+
+      try {
+
+        /*
+        * Ask Apps Script for availability.
+        */
+
+        const response =
+          await fetch(
+            `${API_URL}?date=${key(state.date)}`
+          );
+
+
+        const result =
+          await response.json();
+
+
+        /*
+        * Remove loading message.
+        */
+
+        $("times").innerHTML = "";
+
+
+        /*
+        * Backend error.
+        */
+
+        if (!result.success) {
+
+          $("timeTitle").textContent =
+            "Unable to load availability.";
+
+          $("summary").textContent =
+            "Please try again.";
+
+          return;
+
+        }
+
+
+        /*
+        * Available slots returned by Apps Script.
+        */
+
+        const availableSlots =
+          result.slots;
+
+
+        /*
+        * Create a Set so checking whether
+        * a time is available is fast.
+        */
+
+        const availableTimes =
+          new Set(
+            availableSlots.map(
+              slot => slot.time
+            )
+          );
+
+
+        /*
+        * These are the possible times.
+        *
+        * We generate them locally only for
+        * display purposes.
+        */
+
+        const possibleTimes = [];
+
+        for (
+          let minutes = 10 * 60;
+          minutes <= 18 * 60 + 30;
+          minutes += 30
+        ) {
+
+          const hours =
+            Math.floor(
+              minutes / 60
+            );
+
+          const mins =
+            minutes % 60;
+
+          possibleTimes.push(
+            `${String(hours).padStart(2, "0")}:${String(mins).padStart(2, "0")}`
+          );
+
+        }
+
+
+        /*
+        * Render every possible time.
+        */
+
+        possibleTimes.forEach(
+          time => {
+
+            const button =
+              document.createElement(
+                "button"
+              );
+
+
+            button.type =
+              "button";
+
+            button.className =
+              "time";
+
+            button.textContent =
+              time;
+
+
+            /*
+            * Is this slot available?
+            */
+
+            const available =
+              availableTimes.has(time);
+
+
+            /*
+            * Grey out unavailable times.
+            */
+
+            if (!available) {
+
+              button.disabled =
+                true;
+
+              button.style.opacity =
+                "0.4";
+
+              button.style.cursor =
+                "not-allowed";
+
+            }
+
+
+            /*
+            * Highlight selected time.
+            */
+
+            if (
+              state.time === time &&
+              available
+            ) {
+
+              button.classList.add(
+                "selected"
+              );
+
+            }
+
+
+            /*
+            * Only allow available times
+            * to be selected.
+            */
+
+            if (available) {
+
+              button.onclick = () => {
+
+                state.time =
+                  time;
+
+                render();
+
+              };
+
+            }
+
+
+            $("times").appendChild(
+              button
+            );
+
+          }
+        );
+
+
+        /*
+        * ==========================================================
+        * SUMMARY
+        * ==========================================================
+        */
+
+        if (!state.time) {
+
+          $("summary").textContent =
+            `${fmt(state.date)} · Choose an available time.`;
+
+        } else {
+
+          $("summary").textContent =
+            `Selected: ${fmt(state.date)} at ${state.time}`;
+
+        }
+
+
+        /*
+        * If the selected time became unavailable,
+        * remove the selection.
+        */
+
+        if (
+          state.time &&
+          !availableTimes.has(state.time)
+        ) {
+
+          state.time =
+            null;
+
+          $("summary").textContent =
+            `${fmt(state.date)} · Choose an available time.`;
+
+        }
+
+
+      } catch (error) {
+
+        console.error(error);
+
+
+        $("times").innerHTML = "";
+
+
+        $("timeTitle").textContent =
+          "Unable to load availability.";
+
+
+        $("summary").textContent =
+          "Please refresh the page and try again.";
+
+      }
+
+    }
+
+    
+    /*
+     * ============================================================
+     * MONTH NAVIGATION
+     * ============================================================
+     */
+
+    $("prev").onclick = () => {
+
+      state.month =
+        new Date(
+          state.month.getFullYear(),
+          state.month.getMonth() - 1,
+          1
+        );
+
+      render();
+    };
+
+
+    $("next").onclick = () => {
+
+      state.month =
+        new Date(
+          state.month.getFullYear(),
+          state.month.getMonth() + 1,
+          1
+        );
+
+      render();
+    };
+
+
+    /*
+     * ============================================================
+     * FORM SUBMISSION
+     * ============================================================
+     */
+
+    $("form").onsubmit = async event => {
+
+      event.preventDefault();
+
+
+      $("error").style.display = "none";
+
+
+      /*
+       * Basic validation.
+       */
+
+      if (
+        !$("form").checkValidity() ||
+        !state.date ||
+        !state.time
+      ) {
+
+        $("error").textContent =
+          "Please complete your details and choose a date and time.";
+
+        $("error").style.display = "block";
+
+        $("form").reportValidity();
+
+        return;
+      }
+
+
+      /*
+       * Prevent submission if the Apps Script URL
+       * has not been configured yet.
+       */
+
+      if (
+        API_URL.includes(
+          "PASTE_YOUR_GOOGLE_APPS_SCRIPT"
+        )
+      ) {
+
+        $("error").textContent =
+          "The booking system has not been connected yet.";
+
+        $("error").style.display = "block";
+
+        return;
+      }
+
+
+      const submitButton =
+        $("submitButton");
+
+
+      submitButton.disabled = true;
+
+      submitButton.textContent =
+        "Booking...";
+
+
+      /*
+       * Build booking payload.
+       */
+
+      const booking = {
+
+        name: $("name").value.trim(),
+
+        email: $("email").value.trim(),
+
+        role: $("role").value,
+
+        subject: $("subject").value,
+
+        message: $("message").value.trim(),
+
+        date: key(state.date),
+
+        time: state.time
+
+      };
+
+
+      try {
+
+        const response =
+          await fetch(API_URL, {
+
+            method: "POST",
+
+            headers: {
+              "Content-Type":
+                "text/plain;charset=utf-8"
+            },
+
+            body: JSON.stringify(booking)
+
+          });
+
+
+        const result =
+          await response.json();
+
+
+        /*
+         * Backend rejected the booking.
+         *
+         * Most likely reason:
+         * the selected slot was already booked.
+         */
+
+        if (!result.success) {
+
+          $("error").textContent =
+            result.message ||
+            "That slot is no longer available.";
+
+          $("error").style.display = "block";
+
+          submitButton.disabled = false;
+
+          submitButton.textContent =
+            "Book consultation";
+
+          return;
+        }
+
+
+        /*
+         * Successful booking.
+         */
+
+        $("details").innerHTML = `
+          <strong>
+            Booking ID: ${result.booking.id}
+          </strong>
+
+          <br><br>
+
+          ${result.booking.dateFormatted}
+          at
+          ${result.booking.time}
+
+          <br>
+
+          ${booking.name}
+          ·
+          ${booking.email}
+
+          <br>
+
+          ${booking.role}
+          ·
+          ${booking.subject}
+
+          <br><br>
+
+          <span style="color:#686d65">
+            Keep your Booking ID safe. You'll need it if you want
+            to reschedule or cancel your consultation.
+          </span>
+        `;
+
+
+        $("form").style.display =
+          "none";
+
+        $("success").style.display =
+          "block";
+
+
+      } catch (error) {
+
+        console.error(error);
+
+
+        $("error").textContent =
+          "We couldn't complete the booking. Please try again.";
+
+        $("error").style.display =
+          "block";
+
+
+        submitButton.disabled =
+          false;
+
+        submitButton.textContent =
+          "Book consultation";
+      }
+
+    };
+
+
+    /*
+     * Initial calendar render.
+     */
+
+    render();
+
+  </script>
+
+</body>
+</html>

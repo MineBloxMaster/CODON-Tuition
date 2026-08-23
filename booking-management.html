@@ -1,0 +1,2707 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <title>Manage your booking — CODON</title>
+
+
+  <style>
+
+    :root {
+      --bg: #f6f7f3;
+      --surface: #fff;
+      --ink: #10130f;
+      --muted: #686d65;
+      --line: #dfe3dc;
+      --accent: #b9e96a;
+      --dark: #111510;
+      --danger: #a43b32;
+      --max: 760px;
+    }
+
+
+    * {
+      box-sizing: border-box;
+    }
+
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, system-ui, sans-serif;
+      line-height: 1.5;
+    }
+
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+
+    .wrap {
+      width: min(calc(100% - 36px), var(--max));
+      margin: auto;
+    }
+
+
+    /* ============================================================
+       HEADER
+       ============================================================ */
+
+    header {
+      border-bottom: 1px solid var(--line);
+      background: rgba(246, 247, 243, 0.94);
+      backdrop-filter: blur(15px);
+    }
+
+
+    nav {
+      min-height: 74px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+
+    .brand {
+      font-weight: 800;
+      letter-spacing: -0.03em;
+
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+
+    .brand-logo {
+      width: 126px;
+      height: auto;
+      display: block
+    }
+
+
+    .mark {
+      width: 34px;
+      height: 34px;
+
+      border-radius: 10px;
+
+      background: var(--dark);
+      color: var(--accent);
+
+      display: grid;
+      place-items: center;
+
+      font-weight: 900;
+    }
+
+
+    .back {
+      font-weight: 700;
+      color: #555b52;
+    }
+
+
+    /* ============================================================
+       MAIN
+       ============================================================ */
+
+    main {
+      padding: 80px 0 110px;
+    }
+
+
+    .intro {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+
+      border: 1px solid var(--line);
+      border-radius: 999px;
+
+      padding: 7px 11px;
+
+      font-size: 0.8rem;
+      font-weight: 750;
+
+      margin-bottom: 20px;
+    }
+
+
+    .dot {
+      width: 7px;
+      height: 7px;
+
+      border-radius: 50%;
+
+      background: #9fd94d;
+    }
+
+
+    h1 {
+      margin: 0;
+
+      font-size: clamp(3rem, 7vw, 5rem);
+      line-height: 0.95;
+
+      letter-spacing: -0.065em;
+    }
+
+
+    .intro p {
+      color: var(--muted);
+
+      max-width: 520px;
+
+      margin: 20px auto 0;
+
+      line-height: 1.65;
+    }
+
+
+    /* ============================================================
+       PANELS
+       ============================================================ */
+
+    .panel {
+      background: var(--surface);
+
+      border: 1px solid var(--line);
+      border-radius: 26px;
+
+      padding: 32px;
+
+      box-shadow:
+        0 8px 30px rgba(16, 19, 15, 0.035);
+    }
+
+
+    .panel h2 {
+      margin: 0 0 8px;
+      font-size: 1.3rem;
+    }
+
+
+    .panel-intro {
+      margin: 0 0 24px;
+
+      color: var(--muted);
+
+      font-size: 0.92rem;
+    }
+
+
+    /* ============================================================
+       LOOKUP
+       ============================================================ */
+
+    .field {
+      margin-bottom: 16px;
+    }
+
+
+    label {
+      display: block;
+
+      font-size: 0.86rem;
+      font-weight: 750;
+
+      margin-bottom: 7px;
+    }
+
+
+    input,
+    select {
+      width: 100%;
+
+      border: 1px solid var(--line);
+
+      background: #fbfcfa;
+      color: var(--ink);
+
+      border-radius: 13px;
+
+      padding: 13px;
+
+      outline: none;
+
+      font: inherit;
+    }
+
+
+    input:focus,
+    select:focus {
+      border-color: #78a93d;
+
+      box-shadow:
+        0 0 0 3px rgba(120, 169, 61, 0.14);
+    }
+
+
+    /* ============================================================
+       BUTTONS
+       ============================================================ */
+
+    button {
+      font: inherit;
+    }
+
+
+    .submit,
+    .primary-button {
+      width: 100%;
+
+      border: 0;
+
+      background: var(--dark);
+      color: white;
+
+      border-radius: 999px;
+
+      min-height: 48px;
+
+      font-weight: 800;
+
+      cursor: pointer;
+    }
+
+
+    .submit:disabled,
+    .primary-button:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+
+
+    .secondary-button {
+      width: 100%;
+
+      border: 1px solid var(--line);
+
+      background: #f4f6f1;
+      color: var(--ink);
+
+      border-radius: 999px;
+
+      min-height: 46px;
+
+      font-weight: 800;
+
+      cursor: pointer;
+    }
+
+
+    .danger-button {
+      width: 100%;
+
+      border: 0;
+
+      background: var(--danger);
+      color: white;
+
+      border-radius: 999px;
+
+      min-height: 48px;
+
+      font-weight: 800;
+
+      cursor: pointer;
+    }
+
+
+    /* ============================================================
+       MESSAGES
+       ============================================================ */
+
+    .error {
+      display: none;
+
+      color: var(--danger);
+
+      font-size: 0.84rem;
+
+      margin: 10px 0;
+    }
+
+
+    .success-message {
+      display: none;
+
+      margin-top: 16px;
+
+      padding: 14px;
+
+      border-radius: 13px;
+
+      background: #eef5df;
+      color: #526638;
+
+      font-size: 0.86rem;
+    }
+
+
+    /* ============================================================
+       BOOKING DETAILS
+       ============================================================ */
+
+    .booking {
+      display: none;
+    }
+
+
+    .booking-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 15px;
+
+      margin-bottom: 22px;
+    }
+
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+
+      background: #eef5df;
+      color: #526638;
+
+      border-radius: 999px;
+
+      padding: 6px 10px;
+
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+
+    .status.cancelled {
+      background: #f6e8e6;
+      color: var(--danger);
+    }
+
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+
+      border-radius: 50%;
+
+      background: #8fc744;
+    }
+
+
+    .status.cancelled .status-dot {
+      background: var(--danger);
+    }
+
+
+    .details {
+      border: 1px solid var(--line);
+
+      border-radius: 16px;
+
+      overflow: hidden;
+    }
+
+
+    .detail {
+      display: flex;
+      justify-content: space-between;
+
+      gap: 20px;
+
+      padding: 15px 16px;
+
+      border-bottom: 1px solid var(--line);
+    }
+
+
+    .detail:last-child {
+      border-bottom: 0;
+    }
+
+
+    .detail-label {
+      color: var(--muted);
+
+      font-size: 0.85rem;
+    }
+
+
+    .detail-value {
+      font-weight: 750;
+
+      text-align: right;
+    }
+
+
+    .booking-id {
+      font-family: monospace;
+      letter-spacing: 0.03em;
+    }
+
+
+    /* ============================================================
+       ACTIONS
+       ============================================================ */
+
+    .actions {
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 10px;
+
+      margin-top: 18px;
+    }
+
+
+    /* ============================================================
+       RESCHEDULE
+       ============================================================ */
+
+    .reschedule {
+      display: none;
+
+      margin-top: 20px;
+
+      padding-top: 24px;
+
+      border-top: 1px solid var(--line);
+    }
+
+
+    .reschedule h3 {
+      margin: 0 0 6px;
+
+      font-size: 1.05rem;
+    }
+
+
+    .reschedule-intro {
+      margin: 0 0 20px;
+
+      color: var(--muted);
+
+      font-size: 0.88rem;
+    }
+
+
+    .calendar-head {
+      display: flex;
+
+      justify-content: space-between;
+      align-items: center;
+
+      margin-bottom: 15px;
+    }
+
+
+    .month {
+      font-weight: 800;
+    }
+
+
+    .month-nav {
+      display: flex;
+      gap: 7px;
+    }
+
+
+    .month-nav button,
+    .day,
+    .time {
+      border: 1px solid var(--line);
+
+      background: #f4f6f1;
+
+      border-radius: 10px;
+
+      cursor: pointer;
+    }
+
+
+    .month-nav button {
+      width: 36px;
+      height: 36px;
+    }
+
+
+    .weekdays,
+    .days {
+      display: grid;
+
+      grid-template-columns: repeat(7, 1fr);
+
+      gap: 6px;
+    }
+
+
+    .weekday {
+      text-align: center;
+
+      color: #8a9086;
+
+      font-size: 0.72rem;
+      font-weight: 800;
+
+      padding: 5px;
+    }
+
+
+    .day {
+      min-height: 42px;
+
+      font-weight: 700;
+    }
+
+
+    .day:disabled {
+      cursor: not-allowed;
+
+      color: #b7bbb4;
+
+      background: #f1f2ef;
+    }
+
+
+    .time:disabled {
+      cursor: not-allowed;
+
+      color: #b7bbb4;
+
+      background: #f1f2ef;
+
+      opacity: 0.6;
+    }
+
+
+    .day.selected,
+    .time.selected {
+      background: var(--dark);
+
+      color: #fff;
+
+      border-color: var(--dark);
+    }
+
+
+    .times {
+      margin-top: 24px;
+
+      padding-top: 22px;
+
+      border-top: 1px solid var(--line);
+    }
+
+
+    .times h4 {
+      font-size: 0.95rem;
+    }
+
+
+    .time-grid {
+      display: grid;
+
+      grid-template-columns: repeat(3, 1fr);
+
+      gap: 8px;
+    }
+
+
+    .time {
+      padding: 11px;
+
+      font-weight: 700;
+    }
+
+
+    .reschedule-summary {
+      margin-top: 18px;
+
+      padding: 13px;
+
+      border-radius: 13px;
+
+      background: #f1f4eb;
+
+      color: #485141;
+
+      font-size: 0.88rem;
+    }
+
+
+    .reschedule-buttons {
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 10px;
+
+      margin-top: 15px;
+    }
+
+
+    /* ============================================================
+       CANCEL
+       ============================================================ */
+
+    .cancel-confirmation {
+      display: none;
+
+      margin-top: 20px;
+
+      padding: 20px;
+
+      border: 1px solid #ead4d1;
+
+      border-radius: 16px;
+
+      background: #fcf7f6;
+    }
+
+
+    .cancel-confirmation h3 {
+      margin: 0 0 7px;
+    }
+
+
+    .cancel-confirmation p {
+      margin: 0;
+
+      color: var(--muted);
+
+      font-size: 0.88rem;
+    }
+
+
+    .cancel-buttons {
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 10px;
+
+      margin-top: 17px;
+    }
+
+
+    /* ============================================================
+       NOTE
+       ============================================================ */
+
+    .note {
+      margin-top: 18px;
+
+      padding: 14px;
+
+      border-radius: 13px;
+
+      background: #f1f4eb;
+
+      color: #485141;
+
+      font-size: 0.86rem;
+    }
+
+
+    .back-button {
+      width: 100%;
+
+      border: 1px solid var(--line);
+
+      background: #f4f6f1;
+      color: var(--ink);
+
+      border-radius: 999px;
+
+      min-height: 46px;
+
+      font-weight: 800;
+
+      cursor: pointer;
+
+      margin-top: 12px;
+    }
+
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+
+    footer {
+      border-top: 1px solid var(--line);
+
+      padding: 24px 0 32px;
+
+      color: #73786f;
+
+      font-size: 0.88rem;
+    }
+
+
+    /* ============================================================
+       MOBILE
+       ============================================================ */
+
+    @media (max-width: 560px) {
+
+      .wrap {
+        width: min(
+          calc(100% - 26px),
+          var(--max)
+        );
+      }
+
+
+      .panel {
+        padding: 24px;
+      }
+
+
+      .detail {
+        flex-direction: column;
+
+        gap: 4px;
+      }
+
+
+      .detail-value {
+        text-align: left;
+      }
+
+
+      .booking-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+      }
+
+
+      .actions,
+      .reschedule-buttons,
+      .cancel-buttons {
+        grid-template-columns: 1fr;
+      }
+
+
+      .time-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <!-- ============================================================
+       HEADER
+       ============================================================ -->
+
+  <header>
+
+    <div class="wrap">
+
+      <nav>
+
+        <a
+          class="brand"
+          href="index.html"
+        >
+
+          <img class="brand-logo" src="images/logo.png" alt="CODON"/>
+
+        </a>
+
+
+        <a
+          class="back"
+          href="index.html"
+        >
+
+          ← Back to CODON
+
+        </a>
+
+      </nav>
+
+    </div>
+
+  </header>
+
+
+  <!-- ============================================================
+       MAIN
+       ============================================================ -->
+
+  <main>
+
+    <div class="wrap">
+
+
+      <!-- ========================================================
+           INTRO
+           ======================================================== -->
+
+      <section class="intro">
+
+        <div class="eyebrow">
+
+          <span class="dot"></span>
+
+          Booking management
+
+        </div>
+
+
+        <h1>
+          Manage your booking.
+        </h1>
+
+
+        <p>
+          Enter the Booking ID from your confirmation email
+          to view, reschedule or cancel your consultation.
+        </p>
+
+      </section>
+
+
+      <!-- ========================================================
+           LOOKUP PANEL
+           ======================================================== -->
+
+      <section
+        class="panel"
+        id="lookupPanel"
+      >
+
+        <h2>
+          Find your booking
+        </h2>
+
+
+        <p class="panel-intro">
+
+          Your Booking ID starts with
+          <strong>CODON-</strong>.
+
+        </p>
+
+
+        <form id="lookupForm">
+
+          <div class="field">
+
+            <label for="bookingId">
+              Booking ID
+            </label>
+
+
+            <input
+              id="bookingId"
+              required
+              autocomplete="off"
+              placeholder="e.g. CODON-C05047"
+            >
+
+          </div>
+
+
+          <div
+            id="lookupError"
+            class="error"
+          >
+            Booking not found.
+          </div>
+
+
+          <button
+            class="submit"
+            id="lookupButton"
+            type="submit"
+          >
+
+            Find booking
+
+          </button>
+
+        </form>
+
+      </section>
+
+
+      <!-- ========================================================
+           BOOKING PANEL
+           ======================================================== -->
+
+      <section
+        class="panel booking"
+        id="bookingPanel"
+      >
+
+
+        <div class="booking-header">
+
+          <div>
+
+            <h2>
+              Your consultation
+            </h2>
+
+          </div>
+
+
+          <div
+            class="status"
+            id="statusBadge"
+          >
+
+            <span class="status-dot"></span>
+
+            <span id="status">
+              Confirmed
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- ======================================================
+             BOOKING DETAILS
+             ====================================================== -->
+
+        <div class="details">
+
+
+          <div class="detail">
+
+            <span class="detail-label">
+              Booking ID
+            </span>
+
+
+            <span
+              class="detail-value booking-id"
+              id="displayId"
+            ></span>
+
+          </div>
+
+
+          <div class="detail">
+
+            <span class="detail-label">
+              Name
+            </span>
+
+
+            <span
+              class="detail-value"
+              id="displayName"
+            ></span>
+
+          </div>
+
+
+          <div class="detail">
+
+            <span class="detail-label">
+              Role
+            </span>
+
+
+            <span
+              class="detail-value"
+              id="displayRole"
+            ></span>
+
+          </div>
+
+
+          <div class="detail">
+
+            <span class="detail-label">
+              Subject
+            </span>
+
+
+            <span
+              class="detail-value"
+              id="displaySubject"
+            ></span>
+
+          </div>
+
+
+          <div class="detail">
+
+            <span class="detail-label">
+              Date
+            </span>
+
+
+            <span
+              class="detail-value"
+              id="displayDate"
+            ></span>
+
+          </div>
+
+
+          <div class="detail">
+
+            <span class="detail-label">
+              Time
+            </span>
+
+
+            <span
+              class="detail-value"
+              id="displayTime"
+            ></span>
+
+          </div>
+
+        </div>
+
+
+        <!-- ======================================================
+             ACTION BUTTONS
+             ====================================================== -->
+
+        <div
+          class="actions"
+          id="actions"
+        >
+
+          <button
+            class="primary-button"
+            id="rescheduleButton"
+            type="button"
+          >
+            Reschedule
+          </button>
+
+
+          <button
+            class="secondary-button"
+            id="cancelButton"
+            type="button"
+          >
+            Cancel consultation
+          </button>
+
+        </div>
+
+
+        <!-- ======================================================
+             RESCHEDULE PANEL
+             ====================================================== -->
+
+        <div
+          class="reschedule"
+          id="reschedulePanel"
+        >
+
+          <h3>
+            Choose a new time
+          </h3>
+
+
+          <p class="reschedule-intro">
+
+            Select a new available date and time.
+            Your current consultation will remain unchanged
+            until you confirm the new slot.
+
+          </p>
+
+
+          <!-- CALENDAR -->
+
+          <div class="calendar-head">
+
+            <strong id="rescheduleMonth">
+              Month
+            </strong>
+
+
+            <div class="month-nav">
+
+              <button
+                type="button"
+                id="reschedulePrev"
+                aria-label="Previous month"
+              >
+                ←
+              </button>
+
+
+              <button
+                type="button"
+                id="rescheduleNext"
+                aria-label="Next month"
+              >
+                →
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <div class="weekdays">
+
+            <div class="weekday">Mon</div>
+            <div class="weekday">Tue</div>
+            <div class="weekday">Wed</div>
+            <div class="weekday">Thu</div>
+            <div class="weekday">Fri</div>
+            <div class="weekday">Sat</div>
+            <div class="weekday">Sun</div>
+
+          </div>
+
+
+          <div
+            class="days"
+            id="rescheduleDays"
+          ></div>
+
+
+          <!-- TIMES -->
+
+          <div class="times">
+
+            <h4 id="rescheduleTimeTitle">
+              Choose a date first
+            </h4>
+
+
+            <div
+              class="time-grid"
+              id="rescheduleTimes"
+            ></div>
+
+          </div>
+
+
+          <!-- SUMMARY -->
+
+          <div
+            class="reschedule-summary"
+            id="rescheduleSummary"
+          >
+            No new date or time selected yet.
+          </div>
+
+
+          <div
+            id="rescheduleError"
+            class="error"
+          ></div>
+
+
+          <div class="reschedule-buttons">
+
+            <button
+              class="primary-button"
+              id="confirmReschedule"
+              type="button"
+              disabled
+            >
+              Confirm new time
+            </button>
+
+
+            <button
+              class="secondary-button"
+              id="closeReschedule"
+              type="button"
+            >
+              Keep current time
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <!-- ======================================================
+             CANCELLATION CONFIRMATION
+             ====================================================== -->
+
+        <div
+          class="cancel-confirmation"
+          id="cancelConfirmation"
+        >
+
+          <h3>
+            Cancel this consultation?
+          </h3>
+
+
+          <p>
+
+            This will permanently cancel your current
+            consultation slot.
+
+            You can make a new booking afterwards if needed.
+
+          </p>
+
+
+          <div
+            id="cancelError"
+            class="error"
+          ></div>
+
+
+          <div class="cancel-buttons">
+
+            <button
+              class="secondary-button"
+              id="keepBooking"
+              type="button"
+            >
+              Keep booking
+            </button>
+
+
+            <button
+              class="danger-button"
+              id="confirmCancel"
+              type="button"
+            >
+              Yes, cancel it
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <div
+          class="note"
+          id="bookingNote"
+        >
+
+          Keep your Booking ID safe.
+          You'll need it to manage this consultation again.
+
+        </div>
+
+
+        <button
+          class="back-button"
+          id="searchAgain"
+          type="button"
+        >
+          Look up another booking
+        </button>
+
+      </section>
+
+    </div>
+
+  </main>
+
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+
+  <footer>
+
+    <div class="wrap">
+
+      <strong>CODON</strong>
+      · GCSE Maths & Science Tutoring
+
+    </div>
+
+  </footer>
+
+
+  <script>
+
+    /*
+     * ============================================================
+     * CODON API CONFIGURATION
+     * ============================================================
+     *
+     * This is the SAME Apps Script deployment used by
+     * booking.html.
+     */
+
+    const API_URL =
+      "https://script.google.com/macros/s/AKfycbzrKw8kHGg0NEOJe8urghp6Lo4AkKFYV9LcXTEl0GnSdKIJma0MwbIByvqdm_Vji_F-/exec";
+
+
+    /*
+     * ============================================================
+     * ELEMENT HELPER
+     * ============================================================
+     */
+
+    const $ = id =>
+      document.getElementById(id);
+
+
+    /*
+     * ============================================================
+     * BOOKING STATE
+     * ============================================================
+     */
+
+    let currentBooking = null;
+
+
+    const rescheduleState = {
+
+      month: new Date(),
+
+      date: null,
+
+      time: null
+
+    };
+
+
+    /*
+     * ============================================================
+     * DATE HELPERS
+     * ============================================================
+     */
+
+    function dateKey(date) {
+
+      return `${date.getFullYear()}-${
+        String(date.getMonth() + 1).padStart(2, "0")
+      }-${
+        String(date.getDate()).padStart(2, "0")
+      }`;
+
+    }
+
+
+    function formatDate(dateString) {
+
+      const date =
+        new Date(
+          `${dateString}T00:00:00`
+        );
+
+
+      return date.toLocaleDateString(
+        "en-GB",
+        {
+          weekday: "long",
+          day: "numeric",
+          month: "long",
+          year: "numeric"
+        }
+      );
+
+    }
+
+
+    /*
+     * ============================================================
+     * LOOK UP BOOKING
+     * ============================================================
+     */
+
+    $("lookupForm").onsubmit =
+      async event => {
+
+        event.preventDefault();
+
+
+        $("lookupError").style.display =
+          "none";
+
+
+        const bookingId =
+          $("bookingId")
+            .value
+            .trim()
+            .toUpperCase();
+
+
+        if (!bookingId) {
+
+          return;
+
+        }
+
+
+        const button =
+          $("lookupButton");
+
+
+        button.disabled =
+          true;
+
+        button.textContent =
+          "Looking up...";
+
+
+        try {
+
+          const response =
+            await fetch(
+              `${API_URL}?bookingId=${
+                encodeURIComponent(
+                  bookingId
+                )
+              }`
+            );
+
+
+          const result =
+            await response.json();
+
+
+          if (!result.success) {
+
+            $("lookupError").textContent =
+              result.message ||
+              "Booking not found.";
+
+
+            $("lookupError").style.display =
+              "block";
+
+
+            button.disabled =
+              false;
+
+            button.textContent =
+              "Find booking";
+
+
+            return;
+
+          }
+
+
+          /*
+           * Save the booking globally.
+           */
+
+          currentBooking =
+            result.booking;
+
+
+          /*
+           * Populate details.
+           */
+
+          displayBooking(
+            currentBooking
+          );
+
+
+          /*
+           * Show booking panel.
+           */
+
+          $("lookupPanel").style.display =
+            "none";
+
+
+          $("bookingPanel").style.display =
+            "block";
+
+
+        } catch (error) {
+
+          console.error(error);
+
+
+          $("lookupError").textContent =
+            "We couldn't connect to the booking system. Please try again.";
+
+
+          $("lookupError").style.display =
+            "block";
+
+        }
+
+
+        button.disabled =
+          false;
+
+        button.textContent =
+          "Find booking";
+
+      };
+
+
+    /*
+     * ============================================================
+     * DISPLAY BOOKING
+     * ============================================================
+     */
+
+    function displayBooking(
+      booking
+    ) {
+
+      $("displayId").textContent =
+        booking.id;
+
+
+      $("displayName").textContent =
+        booking.name;
+
+
+      $("displayRole").textContent =
+        booking.role;
+
+
+      $("displaySubject").textContent =
+        booking.subject;
+
+
+      $("displayDate").textContent =
+        formatDate(
+          booking.date
+        );
+
+
+      $("displayTime").textContent =
+        booking.time;
+
+
+      $("status").textContent =
+        booking.status;
+
+
+      /*
+       * Cancelled bookings should not show
+       * management actions.
+       */
+
+      const cancelled =
+        booking.status === "Cancelled";
+
+
+      $("statusBadge")
+        .classList
+        .toggle(
+          "cancelled",
+          cancelled
+        );
+
+
+      $("actions").style.display =
+        cancelled
+          ? "none"
+          : "grid";
+
+
+      $("bookingNote").textContent =
+        cancelled
+
+          ? "This consultation has been cancelled."
+
+          : "Keep your Booking ID safe. You'll need it to manage this consultation again.";
+
+    }
+
+
+    /*
+     * ============================================================
+     * RESCHEDULE — OPEN
+     * ============================================================
+     */
+
+    $("rescheduleButton").onclick =
+      event => {
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        $("reschedulePanel").style.display =
+          "block";
+
+
+        $("cancelConfirmation").style.display =
+          "none";
+
+
+        /*
+         * Start the calendar around the
+         * currently booked month.
+         */
+
+        const currentDate =
+          new Date(
+            `${currentBooking.date}T00:00:00`
+          );
+
+
+        rescheduleState.month =
+          new Date(
+            currentDate.getFullYear(),
+            currentDate.getMonth(),
+            1
+          );
+
+
+        rescheduleState.date =
+          null;
+
+
+        rescheduleState.time =
+          null;
+
+
+        renderRescheduleCalendar();
+
+      };
+
+
+    /*
+     * ============================================================
+     * RESCHEDULE — CLOSE
+     * ============================================================
+     */
+
+    $("closeReschedule").onclick =
+      () => {
+
+        $("reschedulePanel").style.display =
+          "none";
+
+
+        $("rescheduleError").style.display =
+          "none";
+
+      };
+
+
+    /*
+     * ============================================================
+     * RESCHEDULE CALENDAR
+     * ============================================================
+     */
+
+    async function renderRescheduleCalendar() {
+
+      const year =
+        rescheduleState.month
+          .getFullYear();
+
+
+      const month =
+        rescheduleState.month
+          .getMonth();
+
+
+      const first =
+        new Date(
+          year,
+          month,
+          1
+        );
+
+
+      const last =
+        new Date(
+          year,
+          month + 1,
+          0
+        );
+
+
+      $("rescheduleMonth").textContent =
+        rescheduleState.month
+          .toLocaleDateString(
+            "en-GB",
+            {
+              month: "long",
+              year: "numeric"
+            }
+          );
+
+
+      $("rescheduleDays").innerHTML =
+        "";
+
+
+      /*
+       * Monday = first column.
+       */
+
+      const offset =
+        (first.getDay() + 6) % 7;
+
+
+      for (
+        let i = 0;
+        i < offset;
+        i++
+      ) {
+
+        const blank =
+          document.createElement(
+            "div"
+          );
+
+
+        $("rescheduleDays")
+          .appendChild(
+            blank
+          );
+
+      }
+
+
+      /*
+       * Today's date.
+       */
+
+      const today =
+        new Date();
+
+
+      today.setHours(
+        0,
+        0,
+        0,
+        0
+      );
+
+
+      /*
+       * Render dates.
+       */
+
+      for (
+        let number = 1;
+        number <= last.getDate();
+        number++
+      ) {
+
+        const date =
+          new Date(
+            year,
+            month,
+            number
+          );
+
+
+        date.setHours(
+          0,
+          0,
+          0,
+          0
+        );
+
+
+        const button =
+          document.createElement(
+            "button"
+          );
+
+
+        button.type =
+          "button";
+
+
+        button.className =
+          "day";
+
+
+        button.textContent =
+          number;
+
+
+        /*
+         * Only weekends are currently
+         * potentially available.
+         */
+
+        const weekend =
+          date.getDay() === 0 ||
+          date.getDay() === 6;
+
+
+        /*
+         * Do not allow past dates.
+         */
+
+        button.disabled =
+          date <= today ||
+          !weekend;
+
+
+        /*
+         * Highlight selected date.
+         */
+
+        if (
+          rescheduleState.date &&
+          dateKey(
+            rescheduleState.date
+          ) === dateKey(date)
+        ) {
+
+          button.classList.add(
+            "selected"
+          );
+
+        }
+
+
+        button.onclick =
+          async () => {
+
+            rescheduleState.date =
+              date;
+
+
+            rescheduleState.time =
+              null;
+
+
+            await renderRescheduleCalendar();
+
+          };
+
+
+        $("rescheduleDays")
+          .appendChild(
+            button
+          );
+
+      }
+
+
+      /*
+       * ==========================================================
+       * TIME AREA
+       * ==========================================================
+       */
+
+      $("rescheduleTimes").innerHTML =
+        "";
+
+
+      $("confirmReschedule").disabled =
+        true;
+
+
+      if (!rescheduleState.date) {
+
+        $("rescheduleTimeTitle")
+          .textContent =
+            "Choose a date first";
+
+
+        $("rescheduleSummary")
+          .textContent =
+            "No new date or time selected yet.";
+
+
+        return;
+
+      }
+
+
+      $("rescheduleTimeTitle")
+        .textContent =
+          `Checking availability · ${
+            rescheduleState.date
+              .toLocaleDateString(
+                "en-GB",
+                {
+                  day: "numeric",
+                  month: "long"
+                }
+              )
+          }`;
+
+
+      const loading =
+        document.createElement(
+          "p"
+        );
+
+
+      loading.textContent =
+        "Checking available times...";
+
+
+      loading.style.color =
+        "#81877e";
+
+
+      loading.style.fontSize =
+        "0.85rem";
+
+
+      $("rescheduleTimes")
+        .appendChild(
+          loading
+        );
+
+
+      try {
+
+        /*
+         * Use the EXACT same availability
+         * endpoint as booking.html.
+         */
+
+        const response =
+          await fetch(
+            `${API_URL}?date=${
+              dateKey(
+                rescheduleState.date
+              )
+            }`
+          );
+
+
+        const result =
+          await response.json();
+
+
+        $("rescheduleTimes")
+          .innerHTML =
+            "";
+
+
+        if (!result.success) {
+
+          $("rescheduleTimeTitle")
+            .textContent =
+              "Unable to load availability.";
+
+
+          $("rescheduleSummary")
+            .textContent =
+              "Please try again.";
+
+
+          return;
+
+        }
+
+
+        const availableSlots =
+          result.slots;
+
+
+        const availableTimes =
+          new Set(
+            availableSlots.map(
+              slot => slot.time
+            )
+          );
+
+
+        /*
+         * Same possible times as booking.html.
+         */
+
+        const possibleTimes = [];
+
+
+        for (
+          let minutes = 10 * 60;
+          minutes <= 18 * 60 + 30;
+          minutes += 30
+        ) {
+
+          const hours =
+            Math.floor(
+              minutes / 60
+            );
+
+
+          const mins =
+            minutes % 60;
+
+
+          possibleTimes.push(
+            `${String(hours).padStart(2, "0")}:${
+              String(mins).padStart(2, "0")
+            }`
+          );
+
+        }
+
+
+        /*
+         * Render available/unavailable
+         * times.
+         */
+
+        possibleTimes.forEach(
+          time => {
+
+            const button =
+              document.createElement(
+                "button"
+              );
+
+
+            button.type =
+              "button";
+
+
+            button.className =
+              "time";
+
+
+            button.textContent =
+              time;
+
+
+            const available =
+              availableTimes.has(time);
+
+
+            if (!available) {
+
+              button.disabled =
+                true;
+
+
+              button.style.opacity =
+                "0.4";
+
+
+              button.style.cursor =
+                "not-allowed";
+
+            }
+
+
+            if (
+              rescheduleState.time ===
+                time &&
+              available
+            ) {
+
+              button.classList.add(
+                "selected"
+              );
+
+            }
+
+
+            if (available) {
+
+              button.onclick =
+                () => {
+
+                  rescheduleState.time =
+                    time;
+
+
+                  renderRescheduleCalendar();
+
+                };
+
+            }
+
+
+            $("rescheduleTimes")
+              .appendChild(
+                button
+              );
+
+          }
+        );
+
+
+        /*
+         * Make sure a stale selection
+         * is removed.
+         */
+
+        if (
+          rescheduleState.time &&
+          !availableTimes.has(
+            rescheduleState.time
+          )
+        ) {
+
+          rescheduleState.time =
+            null;
+
+        }
+
+
+        if (
+          !rescheduleState.time
+        ) {
+
+          $("rescheduleSummary")
+            .textContent =
+              `${formatDate(
+                dateKey(
+                  rescheduleState.date
+                )
+              )} · Choose an available time.`;
+
+
+          $("confirmReschedule")
+            .disabled =
+              true;
+
+        } else {
+
+          $("rescheduleSummary")
+            .textContent =
+              `New time: ${formatDate(
+                dateKey(
+                  rescheduleState.date
+                )
+              )} at ${rescheduleState.time}`;
+
+
+          $("confirmReschedule")
+            .disabled =
+              false;
+
+        }
+
+
+      } catch (error) {
+
+        console.error(error);
+
+
+        $("rescheduleTimes")
+          .innerHTML =
+            "";
+
+
+        $("rescheduleTimeTitle")
+          .textContent =
+            "Unable to load availability.";
+
+
+        $("rescheduleSummary")
+          .textContent =
+            "Please refresh the page and try again.";
+
+      }
+
+    }
+
+
+    /*
+     * ============================================================
+     * RESCHEDULE — MONTH NAVIGATION
+     * ============================================================
+     */
+
+    $("reschedulePrev").onclick =
+      () => {
+
+        rescheduleState.month =
+          new Date(
+            rescheduleState.month
+              .getFullYear(),
+
+            rescheduleState.month
+              .getMonth() - 1,
+
+            1
+          );
+
+
+        renderRescheduleCalendar();
+
+      };
+
+
+    $("rescheduleNext").onclick =
+      () => {
+
+        rescheduleState.month =
+          new Date(
+            rescheduleState.month
+              .getFullYear(),
+
+            rescheduleState.month
+              .getMonth() + 1,
+
+            1
+          );
+
+
+        renderRescheduleCalendar();
+
+      };
+
+
+    /*
+     * ============================================================
+     * RESCHEDULE — CONFIRM
+     * ============================================================
+     */
+
+    $("confirmReschedule").onclick =
+      async () => {
+
+        if (
+          !currentBooking ||
+          !rescheduleState.date ||
+          !rescheduleState.time
+        ) {
+
+          return;
+
+        }
+
+
+        $("rescheduleError")
+          .style.display =
+            "none";
+
+
+        const button =
+          $("confirmReschedule");
+
+
+        button.disabled =
+          true;
+
+
+        button.textContent =
+          "Rescheduling...";
+
+
+        try {
+
+          /*
+           * Send the exact POST structure
+           * tested in Phase 3B.5.
+           */
+
+          const response =
+            await fetch(
+              API_URL,
+              {
+
+                method: "POST",
+
+                headers: {
+                  "Content-Type":
+                    "text/plain;charset=utf-8"
+                },
+
+                body: JSON.stringify({
+
+                  action:
+                    "reschedule",
+
+                  bookingId:
+                    currentBooking.id,
+
+                  date:
+                    dateKey(
+                      rescheduleState.date
+                    ),
+
+                  time:
+                    rescheduleState.time
+
+                })
+
+              }
+            );
+
+
+          const result =
+            await response.json();
+
+
+          if (!result.success) {
+
+            $("rescheduleError")
+              .textContent =
+                result.message ||
+                "We couldn't reschedule your consultation.";
+
+
+            $("rescheduleError")
+              .style.display =
+                "block";
+
+
+            button.disabled =
+              false;
+
+
+            button.textContent =
+              "Confirm new time";
+
+
+            return;
+
+          }
+
+
+          /*
+           * Backend has successfully moved
+           * the Calendar event and updated
+           * the Sheet.
+           */
+
+          currentBooking.date =
+            result.booking.date;
+
+
+          currentBooking.time =
+            result.booking.time;
+
+
+          currentBooking.status =
+            result.booking.status;
+
+
+          /*
+           * Refresh displayed booking.
+           */
+
+          displayBooking(
+            currentBooking
+          );
+
+
+          /*
+           * Close reschedule interface.
+           */
+
+          $("reschedulePanel")
+            .style.display =
+              "none";
+
+
+          /*
+           * Show confirmation.
+           */
+
+          $("bookingNote").textContent =
+            "Your consultation has been rescheduled successfully. Your new consultation time is now confirmed.";
+
+
+        } catch (error) {
+
+          console.error(error);
+
+
+          $("rescheduleError")
+            .textContent =
+              "We couldn't connect to the booking system. Please try again.";
+
+
+          $("rescheduleError")
+            .style.display =
+              "block";
+
+
+          button.disabled =
+            false;
+
+
+          button.textContent =
+            "Confirm new time";
+
+        }
+
+      };
+
+
+    /*
+     * ============================================================
+     * CANCEL — OPEN
+     * ============================================================
+     */
+
+    $("cancelButton").onclick =
+      event => {
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        $("cancelConfirmation")
+          .style.display =
+            "block";
+
+
+        $("reschedulePanel")
+          .style.display =
+            "none";
+
+
+        $("cancelError")
+          .style.display =
+            "none";
+
+      };
+
+
+    /*
+     * ============================================================
+     * CANCEL — CLOSE
+     * ============================================================
+     */
+
+    $("keepBooking").onclick =
+      () => {
+
+        $("cancelConfirmation")
+          .style.display =
+            "none";
+
+
+        $("cancelError")
+          .style.display =
+            "none";
+
+      };
+
+
+    /*
+     * ============================================================
+     * CANCEL — CONFIRM
+     * ============================================================
+     */
+
+    $("confirmCancel").onclick =
+      async () => {
+
+        if (!currentBooking) {
+
+          return;
+
+        }
+
+
+        const button =
+          $("confirmCancel");
+
+
+        button.disabled =
+          true;
+
+
+        button.textContent =
+          "Cancelling...";
+
+
+        $("cancelError")
+          .style.display =
+            "none";
+
+
+        try {
+
+          /*
+           * Send the exact POST structure
+           * tested in Phase 3B.3.
+           */
+
+          const response =
+            await fetch(
+              API_URL,
+              {
+
+                method: "POST",
+
+                headers: {
+                  "Content-Type":
+                    "text/plain;charset=utf-8"
+                },
+
+                body: JSON.stringify({
+
+                  action:
+                    "cancel",
+
+                  bookingId:
+                    currentBooking.id
+
+                })
+
+              }
+            );
+
+
+          const result =
+            await response.json();
+
+
+          if (!result.success) {
+
+            $("cancelError")
+              .textContent =
+                result.message ||
+                "We couldn't cancel your consultation.";
+
+
+            $("cancelError")
+              .style.display =
+                "block";
+
+
+            button.disabled =
+              false;
+
+
+            button.textContent =
+              "Yes, cancel it";
+
+
+            return;
+
+          }
+
+
+          /*
+           * Update local booking state.
+           */
+
+          currentBooking.status =
+            "Cancelled";
+
+
+          displayBooking(
+            currentBooking
+          );
+
+
+          /*
+           * Hide cancellation controls.
+           */
+
+          $("cancelConfirmation")
+            .style.display =
+              "none";
+
+
+          /*
+           * Give the user a clear confirmation.
+           */
+
+          $("bookingNote").textContent =
+            "Your consultation has been cancelled. Your previous time is no longer reserved.";
+
+
+        } catch (error) {
+
+          console.error(error);
+
+
+          $("cancelError")
+            .textContent =
+              "We couldn't connect to the booking system. Please try again.";
+
+
+          $("cancelError")
+            .style.display =
+              "block";
+
+
+          button.disabled =
+            false;
+
+
+          button.textContent =
+            "Yes, cancel it";
+
+        }
+
+      };
+
+
+    /*
+     * ============================================================
+     * SEARCH AGAIN
+     * ============================================================
+     */
+
+    $("searchAgain").onclick =
+      () => {
+
+        currentBooking =
+          null;
+
+
+        $("bookingPanel")
+          .style.display =
+            "none";
+
+
+        $("lookupPanel")
+          .style.display =
+            "block";
+
+
+        $("bookingId")
+          .value =
+            "";
+
+
+        $("lookupError")
+          .style.display =
+            "none";
+
+
+        $("reschedulePanel")
+          .style.display =
+            "none";
+
+
+        $("cancelConfirmation")
+          .style.display =
+            "none";
+
+
+        $("bookingId")
+          .focus();
+
+      };
+
+  </script>
+
+</body>
+
+</html>
